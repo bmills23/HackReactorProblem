@@ -14,13 +14,53 @@ var itemData = [
 /*The return value should be an object with category properties. Each property value is an array of items that belong to that category.
 Here's an example return object based on our example input:*/
 
-{
-  fruit:  ['apple', 'melon($)'],
-  canned: ['beans', 'corn($)', 'soup'],
-  frozen: ['pizza']
-};
+// {
+//   fruit:  ['apple', 'melon($)'],
+//   canned: ['beans', 'corn($)', 'soup'],
+//   frozen: ['pizza']
+// };
 
 /*Note that items having onSale set to true should have '($)' appended to their item name.
 
 Please complete the function organizeItems and validate it is working by running the tests.
 Your function should work for any similarly formatted input data, not just the example data we've provided.*/
+
+
+function organizeItems (itemData) {
+  let trueItems = []
+  let falseItems = []
+  let items = {
+    fruit: [],
+    canned: [],
+    frozen: []
+  }
+  for (let i = 0; i < itemData.length; i++) {
+    if (itemData[i].onSale == true)  {
+      trueItems.push([itemData[i].category, itemData[i].itemName + '($)'])
+    } 
+    else if (itemData[i].onSale == false) {
+      falseItems.push([itemData[i].category, itemData[i].itemName])
+    }
+  }
+  for (let i = 0; i < trueItems.length; i++) {
+    if (trueItems[i][0] == 'fruit') {
+      items.fruit.push(trueItems[i][1])
+    } else if (trueItems[i][0] == 'canned') {
+      items.canned.push(trueItems[i][1]) 
+    } else if (trueItems[i][0] == 'frozen') {
+      items.frozen.push(trueItems[i][1]) 
+    }
+  }
+  for (let i = 0; i < falseItems.length; i++) {
+    if (falseItems[i][0] == 'fruit') {
+      items.fruit.push(falseItems[i][1])
+    } else if (falseItems[i][0] == 'canned') {
+      items.canned.push(falseItems[i][1]) 
+    } else if (falseItems[i][0] == 'frozen') {
+      items.frozen.push(falseItems[i][1]) 
+    }
+  }
+  return items
+}
+
+//solved in about 10 minutes; solution is inelegant but then again so is the problem
